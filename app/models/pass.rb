@@ -3,7 +3,9 @@ class Pass < ApplicationRecord
 	belongs_to :user 
 	belongs_to :offer
 	has_many :payments, dependent: :destroy 
+
 	before_save :set_dates_and_amount
+	# after_create :stripe_customer
 
 	private
 

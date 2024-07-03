@@ -2,7 +2,7 @@ class Pass < ApplicationRecord
 	belongs_to :category 
 	belongs_to :user 
 	belongs_to :offer
-
+	has_many :payments, dependent: :destroy 
 	before_save :set_dates_and_amount
 
 	private
@@ -12,6 +12,8 @@ class Pass < ApplicationRecord
 		expriry_date
 		set_issue_date
 	end
+
+
 
 	def amount_offer
 		amount = offer.amount * (category.discount / 100.0)
@@ -33,8 +35,5 @@ class Pass < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["category_id", "created_at", "expiry_date", "id", "id_value", "issue_date", "offer_id", "passenger_email", "passenger_phone", "status", "total_amount", "updated_at", "user_id"]
-  end
-
-  
-
+  end 
 end

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   private
 
   def user_params 
-   params.require(:user).permit(:username, :password, :role_id)
+   params.require(:user).permit(:username, :password, :role_id, :email)
   end
 
   def handle_invalid_record(e)

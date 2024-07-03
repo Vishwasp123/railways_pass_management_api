@@ -7,6 +7,8 @@ class User < ApplicationRecord
 	
 	belongs_to :role
 	has_one :pass, dependent: :destroy
+	after_create :stripe_customer
+	
 
 	def admin?
 		role.role_type == 'Admin'
@@ -17,6 +19,12 @@ class User < ApplicationRecord
 	end
 
 	private
+
+	def stripe_customer
+		customer  = Stripe::Customer.create(
+			name: self.username, email: self.email
+		)
+	end 
 
 	def set_default_role
 		self.role ||= Role.find_by(role_type: "User")	

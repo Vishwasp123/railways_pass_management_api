@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   resources :passes
   resources :pages
 
+
+  post 'payment_create', to: 'passes#payment_create'
+  post 'stripe_token', to: 'passes#stripe_token'
+  post 'stripe_customer', to: 'passes#stripe_customer'
+
   #pass_controller abouts_us routes
   post'about_us_create', to: 'pages#create_about_us'
   put 'update_about_us/:id', to: 'pages#update_about_us'
@@ -30,4 +35,8 @@ Rails.application.routes.draw do
 
   #report
   get 'pass_report', to: 'reports#report'
+
+
+  #Stripe routes
+    # resources :payments
 end

@@ -90,12 +90,12 @@ class PassesController < ApplicationController
 	end
 
 
-  def stripe_customer
-		customer  = Stripe::Customer.create(
-			name: params[:name], email: params[:email]
-		)
-		render json: customer
-	end 
+  # def stripe_customer
+	# 	customer  = Stripe::Customer.create(
+	# 		name: params[:name], email: params[:email]
+	# 	)
+	# 	render json: customer
+	# end 
 
 	def payment_create 
   end

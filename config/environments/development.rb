@@ -17,6 +17,11 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+
+  #stripe config 
+
+  # config.stripe.secret_key = ENV['STRIPE_SECRET_KEY']
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?

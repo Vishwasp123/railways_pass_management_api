@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_115630) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_02_125312) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -93,6 +93,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_115630) do
     t.index ["user_id"], name: "index_passes_on_user_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string "status"
+    t.string "payment_transaction_id"
+    t.integer "amount"
+    t.integer "pass_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pass_id"], name: "index_payments_on_pass_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "role_type"
     t.datetime "created_at", null: false
@@ -105,11 +115,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_115630) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role_id"
+    t.string "name"
+    t.string "stripe_id"
+    t.string "email"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "passes", "categories"
   add_foreign_key "passes", "offers"
   add_foreign_key "passes", "users"
+  add_foreign_key "payments", "passes"
   add_foreign_key "users", "roles"
 end
